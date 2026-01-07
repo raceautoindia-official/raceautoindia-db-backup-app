@@ -4,6 +4,7 @@ const { google } = require("googleapis");
 const path = require("path");
 const os = require("os");
 const cron = require("node-cron");
+require('dotenv').config()
 
 // ====== CONFIG ======
 const BACKUP_FOLDER_ID = "1UMh4q5aYGjy_X_9YqhcbtAEdS0m5tmg8"; // Drive folder ID
@@ -11,9 +12,9 @@ const SCOPES = ["https://www.googleapis.com/auth/drive.file"];
 const KEYFILEPATH = path.join(__dirname, "credentials.json");
 
 // MySQL credentials (better: use env vars)
-const dbUser = "race_user";
-const dbPass = "race@123";
-const dbName = "race_news";
+const dbUser =process.env.DB_USER;
+const dbPass = process.env.DB_PASS;
+const dbName = process.env.DB_NAME;
 
 // ====== GOOGLE DRIVE SETUP ======
 const auth = new google.auth.GoogleAuth({ keyFile: KEYFILEPATH, scopes: SCOPES });

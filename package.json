@@ -1,0 +1,20 @@
+{
+  "name": "my-backup-project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start":"node upload_backup.js",
+    "dev":"nodemon upload_backup.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "googleapis": "^148.0.0",
+    "mysql2": "^3.14.0",
+    "node-cron": "^3.0.3",
+    "nodemon": "^3.1.9"
+  }
+}

@@ -145,8 +145,8 @@ function createMysqlBackup(filePath) {
 // Create + cleanup old + upload + delete local temp
 async function createAndUploadBackup() {
   const now = new Date();
-  const dateStr = now.toISOString().split("T")[0];
-  const fileName = `db_backup_${dateStr}.sql`;
+  const ts = now.toISOString().replace(/[:.]/g, "-"); // unique + filename-safe
+  const fileName = `db_backup_${ts}.sql`;
   const filePath = path.join(os.tmpdir(), fileName);
 
   try {
@@ -156,8 +156,8 @@ async function createAndUploadBackup() {
 
     await uploadToDrive(filePath);
 
-    // After successful upload: keep only the latest backup in Drive
-    await keepOnlyNewestDriveBackups(1);
+    // keep only latest 5 backups in Drive
+    await keepOnlyNewestDriveBackups(5);
 
   } catch (err) {
     console.error("❌ Backup process failed:", err.message || err);
